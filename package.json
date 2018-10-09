@@ -1,0 +1,15 @@
+{
+  "name": "fpm-smart-home",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "./node_modules/.bin/nodemon source/app.js",
+    "proxy": "ngrok http 8888"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "nodemon": "^1.18.4",
+    "yf-fpm-server": "^2.4.12"
+  }
+}
