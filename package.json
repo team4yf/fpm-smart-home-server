@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "mqtt": "^2.18.8",
     "nodemon": "^1.18.4",
     "yf-fpm-server": "^2.4.12"
   }

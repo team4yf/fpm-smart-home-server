@@ -21,6 +21,18 @@ router.post('/', async (ctx, next) =>{
 
 fpm.bindRouter(router)
 
+const { MQTT_HOST, MQTT_PORT, MQTT_USERNAME, MQTT_PASSWORD } = process.env;
+
+const mqttserverOption = fpm.getConfig('mqttserver', { host: 'localhost', port: 1883, username: 'admin', password: '123123123'})
+const { host, port, username, password } = Object.assign(mqttserverOption, { 
+    host: MQTT_HOST || mqttserverOption.host, 
+    port: MQTT_PORT || mqttserverOption.port,
+    username: MQTT_USERNAME || mqttserverOption.username,
+    password: MQTT_PASSWORD || mqttserverOption.password });
+
+const client = mqtt.connect(`mqtt://${host}:${port}`, { username, password });
+
+client.subscribe(['$d2s/u1/p1/nb', '$d2s/u1/p1/tcp']);
 
 fpm.run().then( () => {
     console.log('ok~')
