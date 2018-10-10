@@ -8,6 +8,18 @@ const router = fpm.createRouter();
 
 const logic = builder(fpm);
 
+
+router.get('/auth', async (ctx, next) =>{
+    const { client_id, tinyId, redirect_uri } = ctx.request.query;
+    try{
+        console.log(redirect_uri + `?token=${'abc'}`)
+        ctx.redirect(redirect_uri + `?token=${'abc'}`)
+    }catch(e){
+        console.error(e);
+        ctx.body = { error: 'ops'}
+    }
+});
+
 router.post('/', async (ctx, next) =>{
     let postData = ctx.request.body
     console.log(postData);
