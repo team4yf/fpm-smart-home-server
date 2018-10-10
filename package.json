@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "koa-views": "^6.1.4",
     "mqtt": "^2.18.8",
     "nodemon": "^1.18.4",
+    "nunjucks": "^3.1.3",
     "uuid": "^3.3.2",
     "yf-fpm-server": "^2.4.12"
   }
