@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>设备绑定</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="x5-orientation" content="portrait">
+    <link rel="stylesheet" href="https://unpkg.com/mustard-ui@latest/dist/css/mustard-ui.min.css">
+    <style>
+      html, body{ background: rgb(79, 195, 248);}
+      footer{ background: transparent; }
+      footer>p{ font-size: 12px; color: #fff;}
+      button{ display: block; width: 100%; margin-top: 40px;}
+    </style>
+  </head>
+  <body>
+    <main>
+      <section>
+        <div class="panel">
+          <div class="panel-head">
+            <p class="">| 设备绑定</p>
+          </div>
+          <div class="panel-body">
+            <form method="post" action="#">
+              <div class="form-control">
+                <label>SN码</label>
+                <input name="sn" type="text" placeholder="请输入设备背后的SN码">
+              </div>
+              {% for k,v in data %}
+              <input name="{{k}}" value="{{v}}" type="hidden" />
+              {% endfor %}
+              <button class="button-success button-round">&nbsp;&nbsp;绑&nbsp;&nbsp;定&nbsp;&nbsp;</button>
+              
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+        <p class="align-right">@品位家智能生活</p>
+    </footer>
+  </body>
+</html>
