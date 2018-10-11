@@ -13,7 +13,7 @@
       "sql",
       "test",
       "images",
-      "fake",
+      "fake/",
       "mysqldata",
       "node_modules/**/node_modules"
     ],

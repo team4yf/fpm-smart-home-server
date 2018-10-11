@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "./node_modules/.bin/nodemon source/app.js",
-    "proxy": "ngrok http 8888"
+    "proxy": "ngrok http 8888",
+    "bot": "node fake/bot.js"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",

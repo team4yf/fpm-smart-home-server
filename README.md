@@ -5,6 +5,12 @@ It's a backend server for *Xiaowei* which is the smart service cloud system of q
 ![The Tech Network](./snaps/topu.png)
 
 
+## About OAuth
+
+This server point give the `OAuth` for the client. And the `access_token` defined as `sn-tinyId-random`, ex: `abcd-144115211875729586-1539218447175`.
+
+So, We can get the major info from the `access_token` of each vioce query.
+
 ## Functions
 
 - Discovery
@@ -15,7 +21,7 @@ It's a backend server for *Xiaowei* which is the smart service cloud system of q
   ```
 
 - TurnOn
-  - Topic: `$s2d/u3/p1/trunon`
+  - Topic: `$s2d/u3/p1/{sn}/trunon`
   - Payload: `deviceId`
 
   ```
@@ -23,7 +29,7 @@ It's a backend server for *Xiaowei* which is the smart service cloud system of q
   ```
 
 - TurnOff
-  - Topic: `$s2d/u3/p1/trunoff`
+  - Topic: `$s2d/u3/p1/{sn}/trunoff`
   - Payload: `deviceId`
 
   ```
@@ -31,7 +37,7 @@ It's a backend server for *Xiaowei* which is the smart service cloud system of q
   ```
 
 - ActiveScene
-  - Topic: `$s2d/u3/p1/activeScene`
+  - Topic: `$s2d/u3/p1/{sn}/activeScene`
   - Payload: `sceneId`
 
   ```
@@ -39,7 +45,7 @@ It's a backend server for *Xiaowei* which is the smart service cloud system of q
   ```
 
 - DeactiveScene
-  - Topic: `$s2d/u3/p1/deactiveScene`
+  - Topic: `$s2d/u3/p1/{sn}/deactiveScene`
   - Payload: `sceneId`
 
   ```

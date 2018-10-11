@@ -29,16 +29,16 @@ router.get('/auth', async (ctx, next) =>{
         ctx.body = { error: 'ops'}
     }
 });
-const mem = {};
-const tokens = {};
+
 router.post('/auth', async (ctx, next) =>{
     const { sn, client_id, response_type, state, tinyId, redirect_uri } = ctx.request.body;
     // TODO: bind the sn with the tinyId and the client_id
     // should get token by the tinyId
 
     try{
-        mem[tinyId] = mem[tinyId] || uuidv4()
-        ctx.redirect(redirect_uri + `?${response_type}=${mem[tinyId]}&state=${state}`)
+        const code = `${sn}-${tinyId}-${ new Date().getTime()}`
+        console.log(code);
+        ctx.redirect(redirect_uri + `?${response_type}=${code}&state=${state}`)
     }catch(e){
         console.error(e);
         ctx.body = { error: 'ops'}
@@ -48,10 +48,10 @@ router.post('/auth', async (ctx, next) =>{
 router.get('/auth/token', async (ctx, next) => {
     // console.log('get token', ctx.request.query);
     const { code } = ctx.request.query;
-    const access_token = uuidv4();
+    const info = code.split('-');
+    const access_token = `${info[0]}-${info[1]}-${ new Date().getTime() }`;
     const refresh_token = uuidv4();
-    tokens[code] = access_token;
-    console.log(mem, tokens);
+    console.log(access_token);
     ctx.body = {
         access_token,
         scope: '',
@@ -75,5 +75,5 @@ router.post('/', async (ctx, next) =>{
 fpm.bindRouter(router)
 
 fpm.run().then( () => {
-    console.log('ok~')
+    console.log('Ready to go...')
 });
