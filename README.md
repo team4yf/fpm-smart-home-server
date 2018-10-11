@@ -56,6 +56,38 @@ So, We can get the major info from the `access_token` of each vioce query.
 
 - `$d2s/u3/p1/update`
 
+  the payload should be like this:
+  ```javascript
+  {
+    abcd: { // the sn code
+        discoveredAppliances: [ // the smart switcher
+          {
+            "actions": [
+              "TurnOn",
+              "TurnOff"
+            ],
+            "applianceId": "1", // the origin device id
+            "friendlyName": "空调", // the origin device name
+            "modelName": "空调",
+            "version": "1"
+          }
+        ],
+        supportScenes: [  // the smart scene
+          {
+            "actions": [
+              "ActivationScene",
+              "DeactivateScene"
+            ],
+            "sceneId": "1", // the origin sceneid
+            "sceneName": "回家",  // the origin sceneName
+          }
+        ],
+    }
+  }
+  ```
+
+  *WARNNING*: USER SHOULD REDO `Discovery` 发现我的智能家居设备!
+
 - `$d2s/u3/p1/offline`
 
 

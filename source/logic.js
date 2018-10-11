@@ -14,11 +14,74 @@ const builder = fpm => {
 
     const client = mqtt.connect(`mqtt://${host}:${port}`, { username, password });
 
+    // The each device functions
+    /*
+        {
+            abcd: {
+                discoveredAppliances: [
+                    {
+                        "actions": [
+                            "TurnOn",
+                            "TurnOff"
+                        ],
+                        "applianceId": "1",
+                        "friendlyName": "空调",
+                        "modelName": "空调",
+                        "version": "1"
+                    }
+                ],
+                supportScenes: [
+                    {
+                        "actions": [
+                            "ActivationScene",
+                            "DeactivateScene"
+                        ],
+                        "sceneId": "1",
+                        "sceneName": "回家",
+                    }
+                ],
+            }
+        }
+    */
+    const SN_FUNCTIONS = {
+        abcd: {
+            discoveredAppliances: [
+                {
+                    "actions": [
+                        "TurnOn",
+                        "TurnOff"
+                    ],
+                    "applianceId": "1",
+                    "friendlyName": "空调",
+                    "modelName": "空调",
+                    "version": "1"
+                }
+            ],
+            supportScenes: [
+                {
+                    "actions": [
+                        "ActivationScene",
+                        "DeactivateScene"
+                    ],
+                    "sceneId": "1",
+                    "sceneName": "回家",
+                }
+            ],
+        }
+    };
+    
     client.subscribe(['$d2s/u3/p1/update', '$d2s/u3/p1/offline']);
     client.on('message', (topic, payload) => {
-        console.log(topic, payload);
-        // TODO: update the device functions
+        const data = JSON.parse(payload.toString());
+        switch(topic){
+            case '$d2s/u3/p1/update':
+                SN_FUNCTIONS = Object.assign(SN_FUNCTIONS, data);
+                break;
+        }
+        console.log(SN_FUNCTIONS);
     })
+
+
 
     return async message => {
         const { header, payload } = message;
@@ -91,43 +154,7 @@ const builder = fpm => {
                         "namespace": "SmartHome.Discovery",
                         "payloadVersion": "1"
                     },
-                    "payload": {
-                        "discoveredAppliances": [
-                            {
-                                "actions": [
-                                    "TurnOn",
-                                    "TurnOff"
-                                ],
-                                "additionalApplianceDetails": {},
-                                "applianceId": "1",
-                                "friendlyDescription": "descriptionThatIsShownToCustomer",
-                                "friendlyName": "空调",
-                                "manufacturerName": "yourManufacturerName",
-                                "modelName": "空调",
-                                "version": "1"
-                            }
-                        ],
-                        "supportScenes": [
-                            {
-                                "actions": [
-                                    "ActivationScene",
-                                    "DeactivateScene"
-                                ],
-                                "sceneId": "1",
-                                "sceneName": "回家",
-                                "icon": "iconUrl"
-                            },
-                            {
-                                "actions": [
-                                    "ActivationScene",
-                                    "DeactivateScene"
-                                ],
-                                "sceneId": "2",
-                                "sceneName": "吃饭",
-                                "icon": "iconUrl"
-                            }
-                        ]
-                    }
+                    "payload": SN_FUNCTIONS[sn] || {},
                 }
         }
         return {}
