@@ -72,13 +72,17 @@ const builder = fpm => {
     
     client.subscribe(['$d2s/u3/p1/update', '$d2s/u3/p1/offline']);
     client.on('message', (topic, payload) => {
-        const data = JSON.parse(payload.toString());
-        switch(topic){
-            case '$d2s/u3/p1/update':
-                SN_FUNCTIONS = Object.assign(SN_FUNCTIONS, data);
-                break;
+        try{        
+            const data = JSON.parse(payload.toString());
+            switch(topic){
+                case '$d2s/u3/p1/update':
+                    SN_FUNCTIONS = Object.assign(SN_FUNCTIONS, data);
+                    break;
+            }
+            console.log(SN_FUNCTIONS);
+        }catch(e){
+            console.error(topic, payload.toString())
         }
-        console.log(SN_FUNCTIONS);
     })
 
 
