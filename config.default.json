@@ -1,0 +1,12 @@
+{
+    "server":{
+        "port": 8888
+    },
+    "mqttserver":
+    {
+        "host": "mqtt.yunplus.io",
+        "port": 1883,
+        "username": "admin",
+        "password": "123123123"
+    }
+}
