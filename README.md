@@ -73,7 +73,7 @@ So, We can get the major info from the `access_token` of each vioce query.
             "friendlyDescription": "foo",
             "modelName": "空调",
             "manufacturerName": "foo",
-            "additionalApplianceDetails": [],
+            "additionalApplianceDetails": {},
             "icon": "",
             "version": "1"
           }
