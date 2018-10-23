@@ -70,7 +70,13 @@ So, We can get the major info from the `access_token` of each vioce query.
             ],
             "applianceId": "1", // the origin device id
             "friendlyName": "空调", // the origin device name
+            "friendlyDescription": "foo",
             "modelName": "空调",
+            "manufacturerName": "foo",
+            "modelName": "foo",
+            "modelName": "foo",
+            "additionalApplianceDetails": [],
+            "icon": "",
             "version": "1"
           }
         ],
@@ -82,6 +88,7 @@ So, We can get the major info from the `access_token` of each vioce query.
             ],
             "sceneId": "1", // the origin sceneid, *IMPORTANT* This should be String
             "sceneName": "回家",  // the origin sceneName
+            "icon": ""
           }
         ],
     }
