@@ -160,6 +160,7 @@ const builder = fpm => {
                 // 打开场景
                 // TODO: send request to mqtt server
                 client.publish(`$s2d/u3/p1/${sn}/activeScene`, `${ payload.sceneId }b`, { qos: 1, retain: true});
+                console.log(`$s2d/u3/p1/${sn}/activeScene`, `${ payload.sceneId }b`, { qos: 1, retain: true});
                 // “开启回家模式”
                 return {
                     "header": {
