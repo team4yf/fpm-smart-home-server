@@ -52,6 +52,8 @@ So, We can get the major info from the `access_token` of each vioce query.
   示例语句： “小微，关闭回家模式” 目的：关闭回家场景。
   ```
 
+**IMPORTANT** All of the Payload ID is String
+
 ## Feedback Topics
 
 - `$d2s/u3/p1/update`

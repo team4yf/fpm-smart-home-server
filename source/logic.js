@@ -133,7 +133,7 @@ const builder = fpm => {
             case 'TurnOnRequest':
                 // 打开设备
                 // TODO: ...
-                client.publish(`$s2d/u3/p1/${sn}/trunon`, payload.appliance.applianceId, { qos: 1, retain: true});
+                client.publish(`$s2d/u3/p1/${sn}/trunon`, `${ payload.appliance.applianceId }`, { qos: 1, retain: true});
                 return {
                     "header": {
                         "messageId": uuidv4(),
@@ -146,7 +146,7 @@ const builder = fpm => {
             case 'TurnOffRequest':
                 // 关闭设备
                 // TODO:...
-                client.publish(`$s2d/u3/p1/${sn}/trunoff`, payload.appliance.applianceId, { qos: 1, retain: true});
+                client.publish(`$s2d/u3/p1/${sn}/trunoff`, `${ payload.appliance.applianceId }`, { qos: 1, retain: true});
                 return  {
                     "header": {
                         "messageId": uuidv4(),
@@ -159,7 +159,7 @@ const builder = fpm => {
             case 'ActivationSceneRequest':
                 // 打开场景
                 // TODO: send request to mqtt server
-                client.publish(`$s2d/u3/p1/${sn}/activeScene`, payload.sceneId, { qos: 1, retain: true});
+                client.publish(`$s2d/u3/p1/${sn}/activeScene`, `${ payload.sceneId }`, { qos: 1, retain: true});
                 // “开启回家模式”
                 return {
                     "header": {
@@ -172,7 +172,7 @@ const builder = fpm => {
                 }
             case 'DeactivateSceneRequest':
                 // 关闭场景
-                client.publish(`$s2d/u3/p1/${sn}/deactiveScene`, payload.sceneId, { qos: 1, retain: true});
+                client.publish(`$s2d/u3/p1/${sn}/deactiveScene`, `${ payload.sceneId }`, { qos: 1, retain: true});
                 return {
                     "header": {
                         "messageId": uuidv4(),
@@ -185,7 +185,7 @@ const builder = fpm => {
             case 'DiscoverAppliancesRequest':
                 // 发现设备
                 // “发现我的智能家居设备”
-                console.log(JSON.stringify(SN_FUNCTIONS[sn]))
+                // console.log(JSON.stringify(SN_FUNCTIONS[sn]))
                 return {
                     "header": {
                         "messageId": uuidv4(),
