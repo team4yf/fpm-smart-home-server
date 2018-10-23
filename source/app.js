@@ -47,16 +47,28 @@ router.post('/auth', async (ctx, next) =>{
 
 router.get('/auth/token', async (ctx, next) => {
     // console.log('get token', ctx.request.query);
-    const { code } = ctx.request.query;
-    const info = code.split('-');
-    const access_token = `${info[0]}-${info[1]}-${ new Date().getTime() }`;
-    const refresh_token = uuidv4();
-    console.log(access_token);
-    ctx.body = {
-        access_token,
-        scope: '',
-        token_type: 'code',
-        refresh_token
+    const { code, refresh_token } = ctx.request.query;
+    if(code){
+        // first auth
+        const info = code.split('-');
+        const access_token = `${info[0]}-${info[1]}-${ new Date().getTime() }`;
+        const new_refresh_token = `${access_token}`;
+        console.log(access_token);
+        ctx.body = {
+            access_token,
+            scope: '',
+            token_type: 'code',
+            refresh_token: new_refresh_token,
+        }
+    }else if(refresh_token){
+        // refresh the token
+        console.log('refresh_token', refresh_token);
+        ctx.body = {
+            access_token: refresh_token,
+            scope: '',
+            token_type: 'code',
+            refresh_token
+        }
     }
 });
 

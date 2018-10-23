@@ -43,7 +43,31 @@ const builder = fpm => {
             }
         }
     */
-    const SN_FUNCTIONS = {
+    let SN_FUNCTIONS = {
+        edf: {
+            discoveredAppliances: [
+                {
+                    "actions": [
+                        "TurnOn",
+                        "TurnOff"
+                    ],
+                    "applianceId": "10",
+                    "friendlyName": "空调",
+                    "modelName": "空调",
+                    "version": "1"
+                }
+            ],
+            supportScenes: [
+                {
+                    "actions": [
+                        "ActivationScene",
+                        "DeactivateScene"
+                    ],
+                    "sceneId": "10",
+                    "sceneName": "回家",
+                }
+            ],
+        },
         abcd: {
             discoveredAppliances: [
                 {
@@ -65,6 +89,15 @@ const builder = fpm => {
                     ],
                     "sceneId": "1",
                     "sceneName": "回家",
+                },
+                {
+                    "actions": [
+                        "ActivationScene",
+                        "DeactivateScene"
+                    ],
+                    "sceneId": "2",
+                    "sceneName": "吃饭",
+                    "icon": "iconUrl"
                 }
             ],
         }
@@ -79,9 +112,10 @@ const builder = fpm => {
                     SN_FUNCTIONS = Object.assign(SN_FUNCTIONS, data);
                     break;
             }
-            console.log(SN_FUNCTIONS);
+            // console.log(JSON.stringify(SN_FUNCTIONS, null, 2));
         }catch(e){
-            console.error(topic, payload.toString())
+            console.error(e);
+            // console.error(topic, payload.toString())
         }
     })
 
@@ -151,6 +185,7 @@ const builder = fpm => {
             case 'DiscoverAppliancesRequest':
                 // 发现设备
                 // “发现我的智能家居设备”
+                console.log(JSON.stringify(SN_FUNCTIONS[sn]))
                 return {
                     "header": {
                         "messageId": uuidv4(),

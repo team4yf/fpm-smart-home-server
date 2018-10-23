@@ -78,14 +78,14 @@ So, We can get the major info from the `access_token` of each vioce query.
               "ActivationScene",
               "DeactivateScene"
             ],
-            "sceneId": "1", // the origin sceneid
+            "sceneId": "1", // the origin sceneid, *IMPORTANT* This should be String
             "sceneName": "回家",  // the origin sceneName
           }
         ],
     }
   }
   ```
-
+  *IMPORTANT* This should be String
   *WARNNING*: USER SHOULD REDO `Discovery` 发现我的智能家居设备!
 
 - `$d2s/u3/p1/offline`
