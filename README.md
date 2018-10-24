@@ -21,7 +21,7 @@ So, We can get the major info from the `access_token` of each vioce query.
   ```
 
 - TurnOn
-  - Topic: `$s2d/u3/p1/{sn}/trunon`
+  - Topic: `$s2d/u3/p1/{sn}/turnon`
   - Payload: `deviceId`
 
   ```
@@ -29,7 +29,7 @@ So, We can get the major info from the `access_token` of each vioce query.
   ```
 
 - TurnOff
-  - Topic: `$s2d/u3/p1/{sn}/trunoff`
+  - Topic: `$s2d/u3/p1/{sn}/turnoff`
   - Payload: `deviceId`
 
   ```

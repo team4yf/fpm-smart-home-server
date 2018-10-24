@@ -6,8 +6,6 @@ const { builder } = require('./logic');
 
 const fpm = new Fpm();
 
-// const biz = fpm.createBiz('0.0.1');
-
 const router = fpm.createRouter();
 
 const logic = builder(fpm);
@@ -37,7 +35,6 @@ router.post('/auth', async (ctx, next) =>{
 
     try{
         const code = `${sn}-${tinyId}-${ new Date().getTime()}`
-        console.log(code);
         ctx.redirect(redirect_uri + `?${response_type}=${code}&state=${state}`)
     }catch(e){
         console.error(e);
@@ -46,14 +43,12 @@ router.post('/auth', async (ctx, next) =>{
 });
 
 router.get('/auth/token', async (ctx, next) => {
-    // console.log('get token', ctx.request.query);
     const { code, refresh_token } = ctx.request.query;
     if(code){
         // first auth
         const info = code.split('-');
         const access_token = `${info[0]}-${info[1]}-${ new Date().getTime() }`;
         const new_refresh_token = `${access_token}`;
-        console.log(access_token);
         ctx.body = {
             access_token,
             scope: '',
@@ -61,8 +56,6 @@ router.get('/auth/token', async (ctx, next) => {
             refresh_token: new_refresh_token,
         }
     }else if(refresh_token){
-        // refresh the token
-        console.log('refresh_token', refresh_token);
         ctx.body = {
             access_token: refresh_token,
             scope: '',
@@ -74,7 +67,6 @@ router.get('/auth/token', async (ctx, next) => {
 
 router.post('/', async (ctx, next) =>{
     let postData = ctx.request.body
-    // console.log(postData);
     try{
       const rsp = await logic(postData);
       ctx.body = rsp

@@ -14,35 +14,6 @@ const builder = fpm => {
 
     const client = mqtt.connect(`mqtt://${host}:${port}`, { username, password });
 
-    // The each device functions
-    /*
-        {
-            abcd: {
-                discoveredAppliances: [
-                    {
-                        "actions": [
-                            "TurnOn",
-                            "TurnOff"
-                        ],
-                        "applianceId": "1",
-                        "friendlyName": "空调",
-                        "modelName": "空调",
-                        "version": "1"
-                    }
-                ],
-                supportScenes: [
-                    {
-                        "actions": [
-                            "ActivationScene",
-                            "DeactivateScene"
-                        ],
-                        "sceneId": "1",
-                        "sceneName": "回家",
-                    }
-                ],
-            }
-        }
-    */
     let SN_FUNCTIONS = {
         edf: {
             discoveredAppliances: [
@@ -112,10 +83,8 @@ const builder = fpm => {
                     SN_FUNCTIONS = Object.assign(SN_FUNCTIONS, data);
                     break;
             }
-            // console.log(JSON.stringify(SN_FUNCTIONS, null, 2));
         }catch(e){
             console.error(e);
-            // console.error(topic, payload.toString())
         }
     })
 
@@ -133,7 +102,7 @@ const builder = fpm => {
             case 'TurnOnRequest':
                 // 打开设备
                 // TODO: ...
-                client.publish(`$s2d/u3/p1/${sn}/trunon`, `${ payload.appliance.applianceId }`, { qos: 1, retain: true});
+                client.publish(`$s2d/u3/p1/${sn}/turnon`, `${ payload.appliance.applianceId }`, { qos: 1, retain: true});
                 return {
                     "header": {
                         "messageId": uuidv4(),
@@ -146,7 +115,7 @@ const builder = fpm => {
             case 'TurnOffRequest':
                 // 关闭设备
                 // TODO:...
-                client.publish(`$s2d/u3/p1/${sn}/trunoff`, `${ payload.appliance.applianceId }`, { qos: 1, retain: true});
+                client.publish(`$s2d/u3/p1/${sn}/turnoff`, `${ payload.appliance.applianceId }`, { qos: 1, retain: true});
                 return  {
                     "header": {
                         "messageId": uuidv4(),
@@ -185,7 +154,6 @@ const builder = fpm => {
             case 'DiscoverAppliancesRequest':
                 // 发现设备
                 // “发现我的智能家居设备”
-                // console.log(JSON.stringify(SN_FUNCTIONS[sn]))
                 return {
                     "header": {
                         "messageId": uuidv4(),
