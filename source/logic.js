@@ -103,6 +103,7 @@ const builder = fpm => {
                 // 打开设备
                 // TODO: ...
                 client.publish(`$s2d/u3/p1/${sn}/turnon`, `${ payload.appliance.applianceId }`, { qos: 1, retain: true});
+                client.publish(`$s2d/u3/p1/${sn}/all`, JSON.stringify({ event: 'turnon', data: payload.appliance.applianceId}), { qos: 1, retain: true});
                 return {
                     "header": {
                         "messageId": uuidv4(),
@@ -116,6 +117,7 @@ const builder = fpm => {
                 // 关闭设备
                 // TODO:...
                 client.publish(`$s2d/u3/p1/${sn}/turnoff`, `${ payload.appliance.applianceId }`, { qos: 1, retain: true});
+                client.publish(`$s2d/u3/p1/${sn}/all`, JSON.stringify({ event: 'turnoff', data: payload.appliance.applianceId}), { qos: 1, retain: true});
                 return  {
                     "header": {
                         "messageId": uuidv4(),
@@ -129,6 +131,7 @@ const builder = fpm => {
                 // 打开场景
                 // TODO: send request to mqtt server
                 client.publish(`$s2d/u3/p1/${sn}/activeScene`, `${ payload.sceneId }`, { qos: 1, retain: true});
+                client.publish(`$s2d/u3/p1/${sn}/all`, JSON.stringify({ event: 'activeScene', data: payload.sceneId}), { qos: 1, retain: true});
                 // “开启回家模式”
                 return {
                     "header": {
@@ -142,6 +145,7 @@ const builder = fpm => {
             case 'DeactivateSceneRequest':
                 // 关闭场景
                 client.publish(`$s2d/u3/p1/${sn}/deactiveScene`, `${ payload.sceneId }`, { qos: 1, retain: true});
+                client.publish(`$s2d/u3/p1/${sn}/all`, JSON.stringify({ event: 'deactiveScene', data: payload.sceneId}), { qos: 1, retain: true});
                 return {
                     "header": {
                         "messageId": uuidv4(),

@@ -20,6 +20,18 @@ So, We can get the major info from the `access_token` of each vioce query.
   示例语句： “小微，发现我的智能家居设备” 目的：发现与最终用户的设备云帐户相关的设备。 DiscoverAppliancesRequest从Smart Home Skill API发送到技能适配器，目的是发现与客户的设备云帐户相关的设备。如果没有设备可以发现，或者您的设备云遇到错误，则技能适配器应返回一个空的DiscoverAppliancesResponse，而不是错误消息。
   ```
 
+- All
+
+  This topic inclouds all events.
+  - Topic: `$s2d/u3/p1/{sn}/all`
+  - Payload: 
+    ``` javascript
+    {
+      "event": "turnon",
+      "data": "1"
+    }
+    ```
+
 - TurnOn
   - Topic: `$s2d/u3/p1/{sn}/turnon`
   - Payload: `deviceId`
