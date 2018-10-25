@@ -158,6 +158,8 @@ const builder = fpm => {
             case 'DiscoverAppliancesRequest':
                 // 发现设备
                 // “发现我的智能家居设备”
+                client.publish(`$s2d/u3/p1/${sn}/refresh`, `1`, { qos: 1, retain: true});
+                client.publish(`$s2d/u3/p1/${sn}/all`, JSON.stringify({ event: 'refresh', data: 1}), { qos: 1, retain: true});
                 return {
                     "header": {
                         "messageId": uuidv4(),

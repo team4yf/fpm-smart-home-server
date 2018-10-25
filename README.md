@@ -14,6 +14,9 @@ So, We can get the major info from the `access_token` of each vioce query.
 ## Functions
 
 - Discovery
+
+  - Topic: `$s2d/u3/p1/{sn}/refresh`
+
   ```
   这些消息类型用于发现该技能适配器可用的设备和功能.
 
