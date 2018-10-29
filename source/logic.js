@@ -46,7 +46,7 @@ const builder = fpm => {
                         "TurnOn",
                         "TurnOff"
                     ],
-                    "applianceId": "1",
+                    "applianceId": "a1",
                     "friendlyName": "空调",
                     "modelName": "空调",
                     "version": "1"
@@ -58,7 +58,7 @@ const builder = fpm => {
                         "ActivationScene",
                         "DeactivateScene"
                     ],
-                    "sceneId": "1",
+                    "sceneId": "s1",
                     "sceneName": "回家",
                 },
                 {
@@ -66,7 +66,7 @@ const builder = fpm => {
                         "ActivationScene",
                         "DeactivateScene"
                     ],
-                    "sceneId": "2",
+                    "sceneId": "s2",
                     "sceneName": "吃饭",
                     "icon": "iconUrl"
                 }
@@ -160,6 +160,7 @@ const builder = fpm => {
                 // “发现我的智能家居设备”
                 client.publish(`$s2d/u3/p1/${sn}/refresh`, `1`, { qos: 1, retain: true});
                 client.publish(`$s2d/u3/p1/${sn}/all`, JSON.stringify({ event: 'refresh', data: 1}), { qos: 1, retain: true});
+                console.log(JSON.stringify(SN_FUNCTIONS[sn] || {}));
                 return {
                     "header": {
                         "messageId": uuidv4(),
@@ -167,7 +168,27 @@ const builder = fpm => {
                         "namespace": "SmartHome.Discovery",
                         "payloadVersion": "1"
                     },
-                    "payload": SN_FUNCTIONS[sn] || {},
+                    "payload": {
+                        "discoveredAppliances": [],
+                        "supportScenes": [
+                        {
+                            "actions": [
+                                "ActivationScene"
+                            ],
+                            "sceneId": "uniqueSceneId",
+                            "sceneName": "回家",
+                            "icon": "iconUrl"
+                        },
+                        {
+                            "actions": [
+                                "ActivationScene",
+                                "DeactivateScene"
+                            ],
+                            "sceneId": "uniqueSceneId",
+                            "sceneName": "吃饭",
+                            "icon": "iconUrl"
+                        }
+                    ]} || SN_FUNCTIONS[sn] || {},
                 }
         }
         return {}

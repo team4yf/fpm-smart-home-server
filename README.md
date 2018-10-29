@@ -123,3 +123,11 @@ Use the `FPM-IOT-CLOUD-MQTT` .
 - 1. Smart Home Skill API
 
   See [https://xiaowei.qcloud.com/wiki#APIDesc_smart_home_skill_api](https://xiaowei.qcloud.com/wiki#APIDesc_smart_home_skill_api)
+
+## Config
+
+- EndPoint: http://47.92.217.52:8888
+- Auth: http://47.92.217.52:8888/auth
+- Token: http://47.92.217.52:8888/auth/token
+- ClientId: 2
+- Secret: eb69c0ab-eea9-42da-b63e-6fd566b770eb
