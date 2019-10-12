@@ -6,3 +6,4 @@ config.json
 /mysqldata
 /logs
 ngrok
+package-lock.json
